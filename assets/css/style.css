@@ -223,8 +223,8 @@ a:hover {
 }
 
 .socials .ico-circle {
-  height: 40px;
-  width: 40px;
+  height: 80px;
+  width: 80px;
   font-size: 1.2rem;
   border-radius: 50%;
   line-height: 1.6;
@@ -232,11 +232,16 @@ a:hover {
   box-shadow: 0 0 0 3px #0078ff;
   transition: all 500ms ease;
 }
+.socials .ico-circle i {
+  font-size: 30px;
+
+}
 
 .socials .ico-circle:hover {
   background-color: #0078ff;
   color: #fff;
   box-shadow: 0 0 0 3px #cde1f8;
+  transform: scale(1.1);
   transition: all 500ms ease;
 }
 
@@ -836,6 +841,7 @@ a:hover {
   border-radius: 1rem;
   margin-bottom: 3rem;
   text-align: center;
+  height: 300px;
 }
 
 .service-box:hover .ico-circle {
