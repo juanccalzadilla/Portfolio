@@ -2,9 +2,12 @@ let userName = "";
 let step = 0; // Rastrea el progreso de las preguntas
 let isChatInitialized = false; // Controla si la conversación ya fue inicializada
 
+
 function toggleChat() {
   const chatbot = document.getElementById("chatbot");
   chatbot.classList.toggle("hidden");
+  const chatbotInfo = document.getElementById("chatbot-info");
+  chatbotInfo.classList.add("d-none");
 
   if (!chatbot.classList.contains("hidden") && !isChatInitialized) {
     iniciarChat();
@@ -46,43 +49,20 @@ const AIPayload = {
 };
 
 async function answerFormAI(userInput) {
-
-    let AIContext = await fetch('../data/ai-context.txt').then(response => response.text());
-  const data = {
-    contents: [
-      {
-        role: "user",
-        parts: [
-          {
-            text: userInput,
-          },
-        ],
-      },
-    ],
-    systemInstruction: {
-      role: "user",
-      parts: [
-        {
-          text: AIContext,
-        },
-      ],
-    },
-    ...AIPayload,
-  };
-
   fetch(
-    " https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyBJRcVJr3dBeqokT3NJkasW1GUrW4_JvtE",
+    "https://chatbot-sc3fw4tuaa-uc.a.run.app",
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        text: userInput,
+      }),
     }
   ).then((response) => {
     response.json().then((data) => {
-      console.log(data.candidates[0].content.parts[0].text);
-      addMessage("Robotino", data.candidates[0].content.parts[0].text, "bot");
+      addMessage("Robotino", data.text, "bot");
     });
   });
 }
